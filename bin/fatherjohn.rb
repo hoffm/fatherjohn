@@ -32,9 +32,18 @@ module MenOfFolk
 
 
   def run(opts={})
-    text = "#{get_intro} #{get_accolade}, #{get_title} #{get_name} #{get_weather}."
-    client.update(text)
-    text
+    frequency = FREQUENCY || opts[:frequency] || 20
+    test_mode = TEST_MODE || opts[:testing]
+    its_daytime = (8..23).cover?(Time.now.getlocal("-04:00").hour)
+
+    if rand(frequency) == 0
+      if its_daytime || test_mode
+        text = "#{get_intro} #{get_accolade}, #{get_title} #{get_name} #{get_weather}."
+        client.update(text) unless test_mode
+        text
+      end
+    end
+
   end
 
   %w{intro accolade title name weather}.each do |word_type|
