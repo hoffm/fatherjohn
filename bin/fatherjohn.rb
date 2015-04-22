@@ -5,13 +5,13 @@ module MenOfFolk
 
   module_function
 
-  # Set up credentials for @MenOfFolk twitter app.
+  # Set up credentials for @FatherJohnBot twitter app.
   # Use a yml file in development, and a Heroku's
   # ENV in production.
-  CREDS = if File.exists?('menoffolk.yml')
-            puts "Reading config from menoffolk.yml"
+  CREDS = if File.exists?('fatherjohn.yml')
+            puts "Reading config from fatherjohn.yml"
 
-            YAML.load_file('menoffolk.yml')
+            YAML.load_file('fatherjohn.yml')
           else
             ENV
           end
@@ -32,8 +32,9 @@ module MenOfFolk
 
 
   def run(opts={})
-    text = "#{get_intro} #{get_accolade}: #{get_title} #{get_name} #{get_weather}."
+    text = "#{get_intro} #{get_accolade}, #{get_title} #{get_name} #{get_weather}."
     client.update(text)
+    text
   end
 
   %w{intro accolade title name weather}.each do |word_type|
