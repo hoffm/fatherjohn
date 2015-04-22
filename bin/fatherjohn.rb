@@ -34,7 +34,7 @@ module MenOfFolk
   def run(opts={})
     frequency = FREQUENCY || opts[:frequency] || 20
     test_mode = TEST_MODE || opts[:testing]
-    its_daytime = (8..23).cover?(Time.now.getlocal("-04:00").hour)
+    its_daytime = (7..23).cover?(Time.now.getlocal("-04:00").hour)
 
     if rand(frequency) == 0
       if its_daytime || test_mode
