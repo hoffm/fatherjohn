@@ -36,13 +36,18 @@ module MenOfFolk
     test_mode = TEST_MODE || opts[:testing]
     its_daytime = (7..23).cover?(Time.now.getlocal("-04:00").hour)
 
-    if rand(frequency) == 0
-      if its_daytime || test_mode
+    if its_daytime || test_mode
+      if rand(frequency) == 0
         text = "#{get_intro} #{get_accolade}, #{get_title} #{get_name} #{get_weather}."
         client.update(text) unless test_mode
-        text
+        puts "Tweeting: #{text}"
+      else
+        puts "Not tweeting this time."
       end
+    else
+      puts "It's too late to tweet."
     end
+
 
   end
 
